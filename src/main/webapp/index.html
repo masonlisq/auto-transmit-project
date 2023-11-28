@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        <el-menu-item index="1"><a href="logManage.html" style="text-decoration: none">服务器管理</a></el-menu-item>
+
+            <el-menu-item index="2"><a href="logManage.html" style="text-decoration: none">日志管理</a></el-menu-item>
+    </el-menu>
+
+    <div class="line"></div>
+    <template>
+        <el-table :data="tableData" style="width: 100%">
+            <!-- <el-table-column label="ID" prop="id"></el-table-column> -->
+            <el-table-column label="服务器地址" prop="ip"></el-table-column>
+            <el-table-column label="账户" prop="username"></el-table-column>
+            <el-table-column label="密码" prop="password"></el-table-column>
+            <el-table-column label="管理员邮件" prop="emailAddress"></el-table-column>
+            <el-table-column label="同步文件地址" prop="fileListPath"></el-table-column>
+            <el-table-column align="right">
+                <template slot="header" slot-scope="scope">
+                    <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
+                </template>
+                <template slot-scope="scope">
+                    <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                    <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+
+    </template>
+
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return { visible: false }
+        },
+        data() {
+            return {
+                tableData: [],
+                search: '',
+            };
+        },
+        methods: {
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(index, row) {
+                console.log(index, row);
+            },
+            fetchServerData() {
+                axios.get('http://localhost:8080/selectAllServer')
+                    .then(response => {
+                        // 假设API返回服务器对象的数组
+                        this.tableData = response.data;
+                        console.log(this.tableData);
+                    })
+                    .catch(error => {
+                        console.error('获取服务器数据时出错：', error);
+                    });
+            },
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(index, row) {
+                console.log(index, row);
+            }
+        },
+        created() {
+            // 当组件创建时获取服务器数据
+            this.fetchServerData();
+        },
+    })
+</script>
+<!--<script>-->
+<!--    export default {-->
+<!--        data() {-->
+<!--            return {-->
+<!--                activeIndex: '1',-->
+<!--                activeIndex2: '1'-->
+<!--            };-->
+<!--        },-->
+<!--        methods: {-->
+<!--            handleSelect(key, keyPath) {-->
+<!--                console.log(key, keyPath);-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+<style>
+    .demo-table-expand {
+        font-size: 0;
+    }
+    .demo-table-expand label {
+        width: 90px;
+        color: #99a9bf;
+    }
+    .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+    }
+</style>

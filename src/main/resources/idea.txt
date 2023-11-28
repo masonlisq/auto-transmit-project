@@ -1,0 +1,30 @@
+ // 记录日志 检测一次
+//        List<Server> questionList = failList;
+//        String que = Arrays.toString(questionList.toArray());
+//        que = que.substring(que.indexOf('[')+1,que.lastIndexOf(']'));
+//        try{
+//            logMapper.insertALog("check","异常服务器信息："+que);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+        // 记录日志 发送邮件
+//        List<String> emailAddressList = new ArrayList<>();
+//        questionList.forEach(server -> {
+//            emailAddressList.add(server.getEmailAddress());
+//        });
+//        String emailmessage = Arrays.toString(emailAddressList.toArray());
+//        emailmessage = emailmessage.substring(emailmessage.indexOf('[')+1,emailmessage.lastIndexOf(']'));
+//        try {
+//            logMapper.insertALog("email",emailmessage);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+        // 记录日志 同步文件
+//        List<Server> successList = transmitList;
+//        String successMessage = Arrays.toString(successList.toArray());
+//        successMessage = successMessage.substring(successMessage.indexOf("[")+1,successMessage.lastIndexOf("]"));
+//        try {
+//            logMapper.insertALog("transmit",successMessage);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
